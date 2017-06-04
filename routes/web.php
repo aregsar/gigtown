@@ -51,9 +51,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 | Gig controller endpoints
 |
 */
+
 if(config('app.features.gig')) {
 
-    Route::get('/gig/add', 'gig\GigController@showAddForm')->name('gig.showAddForm');
+    Route::Group(['middleware' => ['auth']], function(){
+
+        Route::get('/gig/add', 'gig\GigController@showAddForm')->name('gig.showAddForm');
+    });
 }
 
 
