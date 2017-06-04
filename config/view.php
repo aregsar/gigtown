@@ -14,6 +14,7 @@ return [
     */
 
     'paths' => [
+        app_path('http/controllers'),
         resource_path('views'),
     ],
 

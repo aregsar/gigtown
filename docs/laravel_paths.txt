@@ -1,0 +1,69 @@
+
+
+
+
+/*
+ * laravel 5
+ *
+ * https://laravel.com/docs/5.4/helpers#method-resource-path
+ * in config/view.php and add new path to the paths array:
+
+'paths' => [
+        app_path('http/controllers'),
+        resource_path('views'),
+    ],
+
+---------------------------
+
+'paths' => [
+    realpath(base_path('app/http/controllers')),
+    realpath(base_path('resources/views')),
+],
+
+'paths' => [
+
+    // src/MyNamespace/resources
+    realpath(base_path('src/MyNamespace/resources')),
+
+    // app/resources
+    realpath(app_path('resources'))
+
+],
+
+
+Open up app/Providers/AppServiceProvider.php and add your new view namespace:
+
+public function boot()
+{
+    $this->loadViewsFrom(realpath(base_path('app/http/controllers')), 'gig');
+}
+
+return view('gig.add');
+return view('gig::add');
+
+--------
+//laravel 4?
+//View::addLocation('/path/to/search/');
+//View::addNamespace('theme', '/path/to/theme/views');
+//return View::make('theme.view_name');
+//return View::make('theme::view_name');
+//example:
+//Put the following in app/start/global.php
+//View::addLocation(app('path').'/http/controllers');
+//and
+//View::addNamespace('gig', app('path').'/http/controllers/gig');
+//return View::make('gig.add');
+//or
+//return View::make('gig::add');
+
+---------
+
+Add the folder to the composer.json classmap:
+
+"autoload": {
+    "classmap": [
+        "database",
+        "app/Models"
+    ]
+}
+*/
