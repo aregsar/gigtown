@@ -11,12 +11,9 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
 
 /*
  * From Illuminate/Routing/Router.php
@@ -38,10 +35,25 @@ Auth::routes();
         $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
         $this->post('password/reset', 'Auth\ResetPasswordController@reset');
     }
- */
+*/
+
+Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/gig/add', 'gig\GigController@showAddForm')->name('gig.showAddForm');
+
+/*
+|--------------------------------------------------------------------------
+| Gig Features
+|--------------------------------------------------------------------------
+|
+| Gig controller endpoints
+|
+*/
+if(config('app.features.gig')) {
+
+    Route::get('/gig/add', 'gig\GigController@showAddForm')->name('gig.showAddForm');
+}
 
 
