@@ -1,0 +1,83 @@
+
+
+$request->session()->flash('status', 'Task was successful!');
+
+if ($request->session()->has('users')) {
+    $value = $request->session()->get('users');
+
+$value = $request->session()->get('users','defultval');
+
+=====================
+
+public function add(Request request
+                    ,Response response
+                    ,Validation\Factory $validator)
+{
+	$input =  [ ‘title’ => request.input(‘title’)
+			‘description’ =>  request.input(‘description’)];
+
+	$validator = $validator.make($input,[...]);
+
+	if($validation->fails())
+		return response.redirect()->back()->withErrors($validator);
+
+	$gig = addGig($input);
+
+	$output = [‘title’=>$gig->title];
+
+	return response.view('home.index”, $output);
+}
+
+
+public function create(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'title' => 'required|unique:posts|max:255',
+        'body' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('post/create')
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+}
+
+public function store(Request $request)
+{
+    $this->validate($request, [
+        'title' => 'bail|required|unique:posts|max:255',
+        'body' => 'required',
+    ]);
+}
+
+
+
+
+$validator->errors()->add('field', 'Bad field');
+
+$errors = $validator->errors();
+
+======================================
+
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (count($errors->get('email')) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->get('email') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+

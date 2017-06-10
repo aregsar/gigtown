@@ -1,0 +1,16 @@
+
+in config/views.php
+
+'paths' => [        
+        app_path('http/controllers'),//added 
+        resource_path('views'),
+    ],
+
+------------------------------------------
+
+in config/app.php
+
+ //added
+ 'features' => [
+        'gig' => env('FEATURE_GIG', false),
+    ],

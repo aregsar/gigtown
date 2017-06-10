@@ -1,0 +1,49 @@
+
+
+
+php artisan make:migration add_gigs_table --create=gigs
+
+php artisan make:migration add_desc_to_gigs_table --table=gigs
+
+php artisan migrate
+
+php artisan migrate:refresh
+
+php artisan migrate:rollback --step=2
+
+######################
+#atomic migration file naming 
+
+#add a table
+php artisan make:migration add_gigs_table
+
+#add a column 
+php artisan make:migration add_desc_to_gigs_table
+
+#add a index
+php artisan make:migration add_IXdesc_index_to_gigs_table
+
+#add a foreign key
+php artisan make:migration add_FKuserid_key_to_gigs_table
+
+#add a default constraint
+php artisan make:migration add_DFdesc_default_to_gigs_table
+
+#drop table
+php artisan make:migration drop_gigs_table
+
+#drop column
+php artisan make:migration drop_desc_from_gigs_table
+
+#drop a index
+php artisan make:migration drop_IXdesc_index_from_gigs_table
+
+#drop a foreign key
+php artisan make:migration drop_FKuserid_key_from_gigs_table
+
+#drop a default constraint
+php artisan make:migration drop_DFdesc_default_from_gigs_table
+
+#modify column size or nullability attributes 
+php artisan make:migration alter_desc_of_gigs_table
+
