@@ -1,0 +1,69 @@
+php artisan make:migration add_gigs_table --create=gigs
+
+php artisan make:migration add_desc_to_gigs_table --table=gigs
+
+php artisan migrate
+
+php artisan migrate:refresh
+
+php artisan migrate:rollback --step=2
+
+######################
+#atomic migration file naming 
+
+#add a table
+php artisan make:migration add_gigs_table
+
+#add a column 
+php artisan make:migration add_desc_to_gigs_table
+
+#add a index
+php artisan make:migration add_index_desc_to_gigs_table
+
+#add a foreign key
+php artisan make:migration add_key_user_id_to_gigs_table
+
+#add a default constraint
+php artisan make:migration add_default_desc_to_gigs_table
+
+#drop table
+php artisan make:migration drop_gigs_table
+
+#drop column
+php artisan make:migration drop_desc_from_gigs_table
+
+#drop a index
+php artisan make:migration drop_index_desc_from_gigs_table
+
+#drop a foreign key
+php artisan make:migration drop_key_user_id_from_gigs_table
+
+#drop a default constraint
+php artisan make:migration drop_default_desc_from_gigs_table
+
+#modify column size or nullability attributes 
+php artisan make:migration alter_desc_of_gigs_table
+
+#####################################
+
+php artisan make:migration add_gigs_table --create=gigs
+
+ Schema::create('gigs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('desc');
+            $table->text('date');
+            $table->integer('user_id')->unsigned();
+            $table->timestamps();                    
+        });
+
+php artisan make:migration  add_FKuserid_key_to_gigs_table --table=gigs
+
+ Schema::alter('gigs', function (Blueprint $table) {                  
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+        });
+
+
+
