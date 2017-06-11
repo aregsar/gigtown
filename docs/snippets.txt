@@ -7,6 +7,43 @@ if ($request->session()->has('users')) {
 
 $value = $request->session()->get('users','defultval');
 
+$data = $request->session()->all();
+
+$request->session()->flush();
+
+$errors = Session::get('errors');//returns null?
+
+$errors = Session::get('errors', new Illuminate\Support\MessageBag);
+
+//if($errors->any()) {
+if($errors->has()) {
+    foreach ($errors->all('<p>:message</p>') as $message) {
+        echo $message;
+    }     
+}
+
+=====================
+$request->flash();
+$request->flashExcept('password');
+$request->flashOnly(['username', 'email']);
+$input = $request->only(['username', 'password']);
+$input = $request->all();
+$name = $request->input('name');
+$name = $request->name;
+
+=====================
+
+<form method="POST" action="/profile">
+    {{ csrf_field() }}
+    <input type="text" name="username" value="{{ old('username') }}">
+</form>
+
+$username = $request->old('username');
+
+if ($request->has('name')) {
+    //
+}
+
 =====================
 
 public function add(Request request

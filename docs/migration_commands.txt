@@ -46,6 +46,17 @@ php artisan make:migration alter_desc_of_gigs_table
 
 #####################################
 
+Schema::create('sessions', function ($table) {
+    $table->string('id')->unique();
+    $table->unsignedInteger('user_id')->nullable();
+    $table->string('ip_address', 45)->nullable();
+    $table->text('user_agent')->nullable();
+    $table->text('payload');
+    $table->integer('last_activity');
+});
+
+###########################################
+
 php artisan make:migration add_gigs_table --create=gigs
 
  Schema::create('gigs', function (Blueprint $table) {
