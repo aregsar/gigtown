@@ -1,5 +1,16 @@
 
 
+
+$errors = $validator->errors();
+and
+$errors = Session::get('errors');
+and 
+$errors in view template
+are all an instance of MessageBag
+https://laravel.com/api/5.1/Illuminate/Contracts/Support/MessageBag.html
+
+===============================
+
 $request->session()->flash('status', 'Task was successful!');
 
 if ($request->session()->has('users')) {
@@ -11,11 +22,15 @@ $data = $request->session()->all();
 
 $request->session()->flush();
 
-$errors = Session::get('errors');//returns null?
+==============================
+//flashed validator errors in controller
 
+//$errors variable will be an instance of MessageBag
+//second argument is a default value that
+//will be returned if the specified key does not exist in the session
 $errors = Session::get('errors', new Illuminate\Support\MessageBag);
 
-//if($errors->any()) {
+
 if($errors->has()) {
     foreach ($errors->all('<p>:message</p>') as $message) {
         echo $message;
@@ -90,12 +105,14 @@ public function store(Request $request)
 
 
 
-
 $validator->errors()->add('field', 'Bad field');
 
+//$errors variable will be an instance of MessageBag
 $errors = $validator->errors();
 
 ======================================
+
+//$errors variable will be an instance of MessageBag
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
