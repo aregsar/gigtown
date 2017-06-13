@@ -46,27 +46,36 @@ $input = $request->all();
 $name = $request->input('name');
 $name = $request->name;
 
+if ($request->has('name')) {}
 =====================
 
-<form method="POST" action="/profile">
+
+<form method="POST" action="route('gig.add')">
     {{ csrf_field() }}
-    <input type="text" name="username" value="{{ old('username') }}">
+    <input type="text" name="desc" value="{{ old('desc') }}">
+    <input type="text" id="desc" name="desc" value="{{$post['desc']}}">
+    <button type="submit" >Add</button>
 </form>
 
-$username = $request->old('username');
 
-if ($request->has('name')) {
-    //
+
+//GET
+public function add()
+{
+    $post=[ 'desc'=>$request->old('description')
+            ,'date' =>'today']
+
+    return view('gig.add',['post'=>$post]);
+    //return view('gig.add',$post);
 }
 
-=====================
-
+//POST
 public function add(Request request
                     ,Response response
                     ,Validation\Factory $validator)
 {
-	$input =  [ ‘title’ => request.input(‘title’)
-			‘description’ =>  request.input(‘description’)];
+	$input =  [ 'title' => request.input(‘title’)
+			    ,‘desc’ =>  request.input(‘description’)];
 
 	$validator = $validator.make($input,[...]);
 
@@ -75,7 +84,7 @@ public function add(Request request
 
 	$gig = addGig($input);
 
-	$output = [‘title’=>$gig->title];
+	$output = ['title'=>$gig->title];
 
 	return response.view('home.index”, $output);
 }
@@ -103,12 +112,18 @@ public function store(Request $request)
     ]);
 }
 
+====================================
+
+//$errors variable will be an instance of MessageBag
+$errors = $validator->errors();
+
+return redirect->back()->withErrors($validator)
+return redirect->back()->with('errors',$validator->errors())
+return redirect->route('gig.add')->with('errors',$validator->errors());
 
 
 $validator->errors()->add('field', 'Bad field');
 
-//$errors variable will be an instance of MessageBag
-$errors = $validator->errors();
 
 ======================================
 
