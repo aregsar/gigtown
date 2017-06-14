@@ -1,6 +1,11 @@
 
+https://mattstauffer.co/blog/introducing-laravel-dusk-new-in-laravel-5-4
 
+php artisan dusk:make GigAddTest
 
+php artisan dusk
+
+==============================
 $errors = $validator->errors();
 and
 $errors = Session::get('errors');
