@@ -57,6 +57,7 @@ if(config('app.features.gig')) {
     Route::Group(['middleware' => ['auth']], function(){
 
         Route::get('/gig/add', 'gig\GigController@showAddForm')->name('gig.showAddForm');
+        Route::post('/gig/add', 'gig\GigController@add')->name('gig.add');
     });
 }
 
