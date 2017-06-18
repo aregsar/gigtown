@@ -77,18 +77,18 @@ class GigController extends Controller
 //    public function add(Request $request)
 //    {
 //        //dd($request->session());
-//
+
 //        $validator = Validator::make($request->all(), [
 //            'desc' => 'required|max:10',
 //            'gigday'=>'required|date_format:"Y-m-d"',
 //        ]);
-//
+
 //        if ($validator->fails()) {
 //            return redirect()->back()
 //                ->withErrors($validator)
 //                ->withInput();
 //        }
-//
+
 //        return redirect(route("gig.showAddForm"));
 //    }
 
@@ -98,13 +98,13 @@ class GigController extends Controller
 //            'desc' => 'required|max:10',
 //            'gigday'=>'required|date_format:"Y-m-d"',
 //        ]);
-//
+
 //        if ($validator->fails()) {
-//            return redirect(route("gig.add"))
+//            return redirect(route("gig.showAddForm"))
 //                ->withErrors($validator)
 //                ->withInput();
 //        }
-//
+
 //        return redirect(route("gig.showAddForm"));
 //    }
 
