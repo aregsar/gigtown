@@ -21,10 +21,10 @@
                         @endif
                         <br /><input type="date" name="gigday" value="{{ old('gigday') }}">
 
-                        @if (count($errors->get('gigday')) > 0)
+                        @if (count($gigdayErrors) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
-                                    @foreach ($errors->get('gigday') as $error)
+                                    @foreach ($gigdayErrors as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
