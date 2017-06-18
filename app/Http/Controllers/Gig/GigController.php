@@ -11,26 +11,56 @@ use Illuminate\Support\Facades\Validator;
 class GigController extends Controller
 {  
     public function showAddForm(Request $request)
-    {
-        $viewErrorBag = $request->session()->get('errors');
-        if($viewErrorBag)
-        {
-            //dd($viewErrorBag);
-        
-            $errors = $viewErrorBag->getBag("default");
-            //if($errors)dd($errors);
-            //if($errors)dd($errors->get('desc'));
-            //if($errors)dd($errors->get('gigday'));
-            //if($errors)dd($errors->all());
-            $data = ["gigdayErrors" => $errors->get('gigday')];
-        }
-        else
-        {
-            $data = ["gigdayErrors" => []];
-        }       
-
-        return view('gig.showAddForm',$data);
+    {     
+        return view('gig.showAddForm');
     }
+
+
+    //https://laravel.com/api/5.4/Illuminate/Support/ViewErrorBag.html
+    //https://laravel.com/api/5.4/Illuminate/Contracts/Support/MessageBag.html
+    // public function showAddForm(Request $request)
+    // {
+    //     $viewErrorBag = $request->session()->get('errors');
+    
+    //     if($viewErrorBag)
+    //     {
+    //         dd($viewErrorBag);
+       
+    //         $errors = $viewErrorBag->getBag("default");
+    //         if($errors)dd($errors);
+    //         if($errors)dd($errors->all());
+    //         if($errors)dd($errors->get('desc'));
+    //         if($errors)dd($errors->get('gigday'));         
+    //     }
+    
+    //     return view('gig.showAddForm');
+    // }
+
+    // public function showAddForm(Request $request)
+    // {
+    //     $data = $this->getViewErrors($request);
+
+    //     return view('gig.showAddForm', $data);
+    // }
+
+    // private function getViewErrors(Request $request)
+    // {
+    //     $viewErrorBag = $request->session()->get('errors');
+
+    //     if($viewErrorBag)
+    //     {
+    //         $errors = $viewErrorBag->getBag("default");
+
+    //         $data = ["gigdayErrors" => $errors->get('gigday')
+    //                 ,"descErrors" => $errors->get('desc') ];
+    //     }
+    //     else
+    //     {
+    //         $data = ["gigdayErrors" => [],"descErrors" => []];
+    //     } 
+
+    //     return $data;
+    // }
 
     public function add(Request $request)
     {
@@ -78,24 +108,7 @@ class GigController extends Controller
 //        return redirect(route("gig.showAddForm"));
 //    }
 
-    //https://laravel.com/api/5.4/Illuminate/Support/ViewErrorBag.html
-    //https://laravel.com/api/5.4/Illuminate/Contracts/Support/MessageBag.html
-    // public function showAddForm(Request $request)
-    // {
-    //     $viewErrorBag = $request->session()->get('errors');
-    //     if($viewErrorBag)
-    //     {
-    //         //dd($viewErrorBag);
-    //    
-    //         $errors = $viewErrorBag->getBag("default");
-    //         //if($errors)dd($errors);
-    //         //if($errors)dd($errors->get('desc'));
-    //         //if($errors)dd($errors->get('gigday'));
-    //         //if($errors)dd($errors->all());
-    //     }
-    //
-    //     return view('gig.showAddForm');
-    // }
+  
 
 
 }

@@ -7,6 +7,16 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add Gig Form</div>
 
+                    @if (count($errors->all()) > 0)
+                            <div class="alert alert-danger" style="display:inline-block">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                    @endif
+
                     <form method="POST" action="{{route('gig.add')}}">
                         {{ csrf_field() }}
                         <input type="text" name="desc" value="{{ old('desc') }}">
@@ -19,9 +29,30 @@
                                 </ul>
                             </div>
                         @endif
-                        <br /><input type="date" name="gigday" value="{{ old('gigday') }}">
 
-                        @if (count($gigdayErrors) > 0)
+                        {{-- @if (count($descErrors) > 0)
+                            <div class="alert alert-danger" style="display:inline-block">
+                                <ul>
+                                    @foreach ($descErrors as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif --}}
+
+                     
+                        <br /><input type="date" name="gigday" value="{{ old('gigday') }}">
+                        @if (count($errors->get('gigday')) > 0)
+                            <div class="alert alert-danger" style="display:inline-block">
+                                <ul>
+                                    @foreach ($errors->get('gigday') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        {{-- @if (count($gigdayErrors) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
                                     @foreach ($gigdayErrors as $error)
@@ -29,7 +60,8 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
+                       
 
                         <br /><button type="submit" >Add</button>
                     </form>
