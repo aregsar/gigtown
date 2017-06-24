@@ -81,7 +81,7 @@ class GigController extends Controller
 
         $this->validate($request, [
             'desc' => 'required|max:10',
-            'gigday'=>'required|date_format:"Y-m-d"',
+            'gigday'=>'required|date|date_format:"Y-m-d"|after:today',
         ]);
 
         $request->session()->flash('status', 'Added');
@@ -96,7 +96,7 @@ class GigController extends Controller
 
 //        $validator = Validator::make($request->all(), [
 //            'desc' => 'required|max:10',
-//            'gigday'=>'required|date_format:"Y-m-d"',
+//            'gigday'=>'required|date|date_format:"Y-m-d"|after:today',
 //        ]);
 
 //        if ($validator->fails()) {
@@ -113,7 +113,7 @@ class GigController extends Controller
 //    {
 //        $validator = Validator::make($request->all(), [
 //            'desc' => 'required|max:10',
-//            'gigday'=>'required|date_format:"Y-m-d"',
+//            'gigday'=>'required|date|date_format:"Y-m-d"|after:today',
 //        ]);
 
 //        if ($validator->fails()) {
