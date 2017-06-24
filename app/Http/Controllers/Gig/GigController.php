@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class GigController extends Controller
 {  
-    public function showAddForm(Request $request)
-    {     
-        return view('gig.showAddForm');
-    }
+    // public function showAddForm(Request $request)
+    // {     
+    //     return view('gig.showAddForm');
+    // }
 
 
     //https://laravel.com/api/5.4/Illuminate/Support/ViewErrorBag.html
@@ -36,34 +36,38 @@ class GigController extends Controller
     //     return view('gig.showAddForm');
     // }
 
-    // public function showAddForm(Request $request)
-    // {
-    //     $data = $this->getViewErrors($request);
+   
+    public function showAddForm(Request $request)
+    {
+        $viewErrorBag = $request->session()->get('errors');
 
-    //     return view('gig.showAddForm', $data);
-    // }
+        $gig_add_url = route('gig.add');
 
-    // private function getViewErrors(Request $request)
-    // {
-    //     $viewErrorBag = $request->session()->get('errors');
+        if($viewErrorBag)
+        {
+            $errors = $viewErrorBag->getBag("default");
 
-    //     if($viewErrorBag)
-    //     {
-    //         $errors = $viewErrorBag->getBag("default");
+            $data = ["gigdayErrors" => $errors->get('gigday')
+                     ,"descErrors" => $errors->get('desc') 
+                     ,"oldDesc" => $request->old("desc")
+                     ,"oldGigDay" => $request->old("gigday")
+                     ,"gig_add_url" => $gig_add_url];
+        }
+        else
+        {
+            $data = ["gigdayErrors" => []
+            ,"descErrors" => []
+            ,"oldDesc" => null
+            ,"oldGigDay" => null
+            ,"gig_add_url" => $gig_add_url];
+        } 
 
-    //         $data = ["gigdayErrors" => $errors->get('gigday')
-    //                 ,"descErrors" => $errors->get('desc') ];
-    //     }
-    //     else
-    //     {
-    //         $data = ["gigdayErrors" => [],"descErrors" => []];
-    //     } 
-
-    //     return $data;
-    // }
+        return view('gig.showAddForm', $data);
+    }
 
     public function add(Request $request)
     {
+        //dd(session());
         //dd($request->session());
 
         $this->validate($request, [
