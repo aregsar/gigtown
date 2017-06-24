@@ -70,6 +70,10 @@ class GigController extends Controller
     //     return view('gig.addForm', $data);
     // }
 
+
+
+
+    //Route::post('/gig/add', 'gig\GigController@add')->name('gig.add');
     public function add(Request $request)
     {
         //dd(session());
@@ -80,8 +84,11 @@ class GigController extends Controller
             'gigday'=>'required|date_format:"Y-m-d"',
         ]);
 
+        $request->session()->flash('status', 'Added');
         return redirect(route("gig.addForm"));
+        //return redirect(route("gig.addForm"))->with('status', 'Added');
     }
+
 
 //    public function add(Request $request)
 //    {
@@ -98,8 +105,9 @@ class GigController extends Controller
 //                ->withInput();
 //        }
 
-//        return redirect(route("gig.addForm"));
+//        return redirect(route("gig.addForm"))->with('status', 'Added');
 //    }
+
 
 //    public function add(Request $request)
 //    {
@@ -114,7 +122,7 @@ class GigController extends Controller
 //                ->withInput();
 //        }
 
-//        return redirect(route("gig.addForm"));
+//        return redirect(route("gig.addForm"))->with('status', 'Added');
 //    }
 
   

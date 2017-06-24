@@ -7,6 +7,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add Gig Form</div>
 
+                    {{ session('status') }}
+                    
                     {{--
                     @if (count($errors->all()) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
