@@ -10,15 +10,16 @@ use Illuminate\Support\Facades\Validator;
 
 class GigController extends Controller
 {  
-    // public function showAddForm(Request $request)
-    // {     
-    //     return view('gig.showAddForm');
-    // }
+    //Route::get('/gig/add', 'gig\GigController@addForm')->name('gig.addForm');
+    public function addForm(Request $request)
+    {     
+        return view('gig.addForm');
+    }
 
 
     //https://laravel.com/api/5.4/Illuminate/Support/ViewErrorBag.html
     //https://laravel.com/api/5.4/Illuminate/Contracts/Support/MessageBag.html
-    // public function showAddForm(Request $request)
+    // public function addForm(Request $request)
     // {
     //     $viewErrorBag = $request->session()->get('errors');
     
@@ -33,37 +34,41 @@ class GigController extends Controller
     //         if($errors)dd($errors->get('gigday'));         
     //     }
     
-    //     return view('gig.showAddForm');
+    //     return view('gig.addForm');
     // }
 
    
-    public function showAddForm(Request $request)
-    {
-        $viewErrorBag = $request->session()->get('errors');
+    // public function addForm(Request $request)
+    // {
+    //     $viewErrorBag = $request->session()->get('errors');
 
-        $gig_add_url = route('gig.add');
+    //     $gig_add_url = route('gig.add');
 
-        if($viewErrorBag)
-        {
-            $errors = $viewErrorBag->getBag("default");
+    //     if($viewErrorBag)
+    //     {
+    //         $errors = $viewErrorBag->getBag("default");
 
-            $data = ["gigdayErrors" => $errors->get('gigday')
-                     ,"descErrors" => $errors->get('desc') 
-                     ,"oldDesc" => $request->old("desc")
-                     ,"oldGigDay" => $request->old("gigday")
-                     ,"gig_add_url" => $gig_add_url];
-        }
-        else
-        {
-            $data = ["gigdayErrors" => []
-            ,"descErrors" => []
-            ,"oldDesc" => null
-            ,"oldGigDay" => null
-            ,"gig_add_url" => $gig_add_url];
-        } 
+    //         $data = ["gigdayErrors" => $errors->get('gigday')
+    //                  ,"descErrors" => $errors->get('desc') 
+    //                  ,"oldDesc" => $request->old("desc")
+    //                  ,"oldGigDay" => $request->old("gigday")
+    //                  ,"gig_add_url" => $gig_add_url];
 
-        return view('gig.showAddForm', $data);
-    }
+    //         //dd($data);
+    //     }
+    //     else
+    //     {
+    //         $data = ["gigdayErrors" => []
+    //         ,"descErrors" => []
+    //         ,"oldDesc" => null
+    //         ,"oldGigDay" => null
+    //         ,"gig_add_url" => $gig_add_url];
+
+    //         //dd($data);
+    //     }        
+
+    //     return view('gig.addForm', $data);
+    // }
 
     public function add(Request $request)
     {
@@ -75,7 +80,7 @@ class GigController extends Controller
             'gigday'=>'required|date_format:"Y-m-d"',
         ]);
 
-        return redirect(route("gig.showAddForm"));
+        return redirect(route("gig.addForm"));
     }
 
 //    public function add(Request $request)
@@ -93,7 +98,7 @@ class GigController extends Controller
 //                ->withInput();
 //        }
 
-//        return redirect(route("gig.showAddForm"));
+//        return redirect(route("gig.addForm"));
 //    }
 
 //    public function add(Request $request)
@@ -104,12 +109,12 @@ class GigController extends Controller
 //        ]);
 
 //        if ($validator->fails()) {
-//            return redirect(route("gig.showAddForm"))
+//            return redirect(route("gig.addForm"))
 //                ->withErrors($validator)
 //                ->withInput();
 //        }
 
-//        return redirect(route("gig.showAddForm"));
+//        return redirect(route("gig.addForm"));
 //    }
 
   
