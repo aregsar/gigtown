@@ -41,8 +41,8 @@ class GigController extends Controller
     // public function addForm(Request $request)
     // {
     //     $viewErrorBag = $request->session()->get('errors');
-
     //     $gig_add_url = route('gig.add');
+    //     $status = session('status');
 
     //     if($viewErrorBag)
     //     {
@@ -52,18 +52,18 @@ class GigController extends Controller
     //                  ,"descErrors" => $errors->get('desc') 
     //                  ,"oldDesc" => $request->old("desc")
     //                  ,"oldGigDay" => $request->old("gigday")
-    //                  ,"gig_add_url" => $gig_add_url];
-
+    //                  ,"gig_add_url" => $gig_add_url
+    //                  ,"status"=> $status];
     //         //dd($data);
     //     }
     //     else
     //     {
     //         $data = ["gigdayErrors" => []
-    //         ,"descErrors" => []
-    //         ,"oldDesc" => null
-    //         ,"oldGigDay" => null
-    //         ,"gig_add_url" => $gig_add_url];
-
+    //                 ,"descErrors" => []
+    //                 ,"oldDesc" => null
+    //                 ,"oldGigDay" => null
+    //                 ,"gig_add_url" => $gig_add_url
+    //                 ,"status"=> $status];
     //         //dd($data);
     //     }        
 
