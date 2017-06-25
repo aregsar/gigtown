@@ -70,7 +70,56 @@ class GigController extends Controller
     //     return view('gig.addForm', $data);
     // }
 
+   
+   
+    // public function addForm(Request $request)
+    // {
+    //     $gig_add_url = route('gig.add');
+    //     $status = session('status');
 
+    //     if($this->hasValidationErrors($request))
+    //     {
+    //         $data = ["gigdayErrors" => $this->getValidationErrorsFor($request,'gigday')
+    //                  ,"descErrors" => $this->getValidationErrorsFor($request,'desc') 
+    //                  ,"oldDesc" => $request->old("desc")
+    //                  ,"oldGigDay" => $request->old("gigday")
+    //                  ,"gig_add_url" => $gig_add_url
+    //                  ,"status"=> $status];
+    //     }
+    //     else
+    //     {
+    //         $data = ["gigdayErrors" => []
+    //                 ,"descErrors" => []
+    //                 ,"oldDesc" => null
+    //                 ,"oldGigDay" => null
+    //                 ,"gig_add_url" => $gig_add_url
+    //                 ,"status"=> $status];
+    //     }        
+
+    //     return view('gig.addForm', $data);
+    // }
+
+    // protected function hasValidationErrors(Request $request)
+    // {
+    //     $viewErrorBag = $request->session()->get('errors');
+    //     if($viewErrorBag)
+    //     {
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    // protected function getValidationErrorsFor(Request $request, $fieldName)
+    // {
+    //     $viewErrorBag = $request->session()->get('errors');
+    //     if($viewErrorBag)
+    //     {
+    //         $errors = $viewErrorBag->getBag("default");
+
+    //         return $errors->get($fieldName);
+    //     }
+    //     return [];
+    // }
 
 
     //Route::post('/gig/add', 'gig\GigController@add')->name('gig.add');

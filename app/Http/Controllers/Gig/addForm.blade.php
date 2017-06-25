@@ -60,7 +60,7 @@
 
                         <br /><button type="submit" >Add</button>
                     </form>
-                 
+                
 
                      {{--
                     <form method="POST" action="{{$gig_add_url}}">
@@ -92,7 +92,7 @@
                         
                         <br /><button type="submit" >Add</button>
                     </form>
-                       --}}
+                        --}}
                     
                 </div>
             </div>
