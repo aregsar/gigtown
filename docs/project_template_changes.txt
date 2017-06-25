@@ -14,3 +14,16 @@ in config/app.php
  'features' => [
         'gig' => env('FEATURE_GIG', false),
     ],
+
+--------------------------------------
+To support feature folders
+
+need to replace:
+namespace App\Http\Controllers;
+with:
+namespace App\Http\Controllers\Home;
+appendin the feature folder name
+
+also need to add 
+use App\Http\Controllers\Controller;
+-----------------------------------------
