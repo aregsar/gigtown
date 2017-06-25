@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Add Gig Form</div>
+                 
+                    <div class="panel-heading">{{ session('status') }}</div>
 
-                    {{ session('status') }}
-                    
-                    {{--
+                    <div class="panel-heading">Add a Gig</div>
+                   
                     @if (count($errors->all()) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
@@ -19,13 +19,16 @@
                                 </ul>
                             </div>
                     @endif
-                     --}}
+                    <br />
+                    <br />
+                   
 
-                    
+                  
                     <form method="POST" action="{{route('gig.add')}}">
                         {{ csrf_field() }}
 
-                        <input type="text" name="desc" value="{{ old('desc') }}">
+                        <textarea name="desc" id="text" rows="4" cols="20" autofocus>{{ old('desc') }}</textarea>
+                         <br />
                         @if (count($errors->get('desc')) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
@@ -36,9 +39,10 @@
                             </div>
                         @endif
 
-                        <br />
+                       <br />
                                              
                         <input type="date" name="gigday" value="{{ old('gigday') }}">
+                        <br />
                         @if (count($errors->get('gigday')) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
@@ -51,13 +55,13 @@
 
                         <br /><button type="submit" >Add</button>
                     </form>
-                   
+                 
 
-                   {{--
+                     {{--
                     <form method="POST" action="{{$gig_add_url}}">
                         {{ csrf_field() }}
 
-                        <input type="text" name="desc" value="{{ $oldDesc }}">
+                        <textarea name="desc" id="text" rows="4" cols="20" autofocus>{{ $oldDesc  }}</textarea>
                         @if (count($descErrors) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
@@ -83,7 +87,7 @@
                         
                         <br /><button type="submit" >Add</button>
                     </form>
-                     --}}
+                       --}}
                     
                 </div>
             </div>
