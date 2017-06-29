@@ -6,14 +6,20 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                   
-                  <div class="panel-heading">{{ session('status') }}</div>
+                  <div class="panel-heading">
+                      <div class="alert alert-success">
+                        {{ session('status') }}
+                      </div>
+                  </div>
 
                  {{-- 
                     <div class="panel-heading">{{ $status }}</div>
                  --}}
 
                     <div class="panel-heading">Add a Gig</div>
-                   
+
+                    {{--
+
                     @if (count($errors->all()) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
@@ -25,7 +31,7 @@
                     @endif
                     <br />
                     <br />
-                   
+                    --}}
 
                   
                     <form method="POST" action="{{route('gig.add')}}">
