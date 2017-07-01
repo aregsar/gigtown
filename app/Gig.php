@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gig extends Model
 {
     protected $fillable = [
-        'desc', 'date'
+        'desc', 'date','user_id'
     ];
 
     public function artist()

@@ -87,7 +87,11 @@ public function add(Request request
 	if($validation->fails())
 		return response.redirect()->back()->withErrors($validator);
 
-	$gig = addGig($input);
+    $input =  [ 'title' => request.input(‘title’)
+			    ,‘desc’ =>  request.input(‘description’)];
+
+	
+    $gig = new Gig($input);
 
 	$output = ['title'=>$gig->title];
 

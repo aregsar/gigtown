@@ -18,6 +18,24 @@ class GigController extends Controller
         return view('gig.addForm');
     }
 
+    //Route::post('/gig/add', 'gig\GigController@add')->name('gig.add');
+    public function add(Request $request)
+    {
+        $this->validate($request, [
+            'desc' => 'required|max:100',
+            'date'=>'required|date|date_format:"Y-m-d"|after:today',
+        ]);
+
+        $input = ['user_id'=> $request->user()->id
+            ,'desc' => $request->input('desc')
+            ,'date' => $request->input('date')];
+
+        (new Gig($input))->save();
+
+        return redirect(route("gig.addForm"))->with('status', 'Added');
+    }
+
+
 
     //https://laravel.com/api/5.4/Illuminate/Support/ViewErrorBag.html
     //https://laravel.com/api/5.4/Illuminate/Contracts/Support/MessageBag.html
@@ -124,36 +142,11 @@ class GigController extends Controller
     // }
 
 
-    //Route::post('/gig/add', 'gig\GigController@add')->name('gig.add');
-    public function add(Request $request)
-    {
-        //dd(session());
-        //dd($request->session());
-
-        $this->validate($request, [
-            'desc' => 'required|max:100',
-            'date'=>'required|date|date_format:"Y-m-d"|after:today',
-        ]);
-
-
-        $user = $request->user();
-        //dd($user);
-
-
-
-        //$gig = new Gig($request);
-        //dd($gig);
-        //$user->gigs()->save($gig);
-        //dd($user->gigs->toArray());
-
-        //$request->session()->flash('status', 'Added');
-        //return redirect(route("gig.addForm"));
-        return redirect(route("gig.addForm"))->with('status', 'Added');
-    }
 
 
 //    public function add(Request $request)
 //    {
+//        //dd(session());
 //        //dd($request->session());
 //
 //        $validator = Validator::make($request->all(), [
@@ -167,7 +160,8 @@ class GigController extends Controller
 //                ->withInput();
 //        }
 //
-//        return redirect(route("gig.addForm"))->with('status', 'Added');
+//        $request->session()->flash('status', 'Added');
+//        return redirect(route("gig.addForm"));
 //    }
 
 
