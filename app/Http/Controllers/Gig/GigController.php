@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
+use App\Gig;
 
 class GigController extends Controller
 {  
@@ -31,7 +33,7 @@ class GigController extends Controller
     //         if($errors)dd($errors);
     //         if($errors)dd($errors->all());
     //         if($errors)dd($errors->get('desc'));
-    //         if($errors)dd($errors->get('gigday'));         
+    //         if($errors)dd($errors->get('date'));
     //     }
     
     //     return view('gig.addForm');
@@ -48,20 +50,20 @@ class GigController extends Controller
     //     {
     //         $errors = $viewErrorBag->getBag("default");
 
-    //         $data = ["gigdayErrors" => $errors->get('gigday')
+    //         $data = ["dateErrors" => $errors->get('date')
     //                  ,"descErrors" => $errors->get('desc') 
     //                  ,"oldDesc" => $request->old("desc")
-    //                  ,"oldGigDay" => $request->old("gigday")
+    //                  ,"oldDate" => $request->old("date")
     //                  ,"gig_add_url" => $gig_add_url
     //                  ,"status"=> $status];
     //         //dd($data);
     //     }
     //     else
     //     {
-    //         $data = ["gigdayErrors" => []
+    //         $data = ["dateErrors" => []
     //                 ,"descErrors" => []
     //                 ,"oldDesc" => null
-    //                 ,"oldGigDay" => null
+    //                 ,"oldDate" => null
     //                 ,"gig_add_url" => $gig_add_url
     //                 ,"status"=> $status];
     //         //dd($data);
@@ -79,19 +81,19 @@ class GigController extends Controller
 
     //     if($this->hasValidationErrors($request))
     //     {
-    //         $data = ["gigdayErrors" => $this->getValidationErrorsFor($request,'gigday')
+    //         $data = ["dateErrors" => $this->getValidationErrorsFor($request,'date')
     //                  ,"descErrors" => $this->getValidationErrorsFor($request,'desc') 
     //                  ,"oldDesc" => $request->old("desc")
-    //                  ,"oldGigDay" => $request->old("gigday")
+    //                  ,"oldDate" => $request->old("date")
     //                  ,"gig_add_url" => $gig_add_url
     //                  ,"status"=> $status];
     //     }
     //     else
     //     {
-    //         $data = ["gigdayErrors" => []
+    //         $data = ["dateErrors" => []
     //                 ,"descErrors" => []
     //                 ,"oldDesc" => null
-    //                 ,"oldGigDay" => null
+    //                 ,"oldDate" => null
     //                 ,"gig_add_url" => $gig_add_url
     //                 ,"status"=> $status];
     //     }        
@@ -130,12 +132,23 @@ class GigController extends Controller
 
         $this->validate($request, [
             'desc' => 'required|max:100',
-            'gigday'=>'required|date|date_format:"Y-m-d"|after:today',
+            'date'=>'required|date|date_format:"Y-m-d"|after:today',
         ]);
 
-        $request->session()->flash('status', 'Added');
-        return redirect(route("gig.addForm"));
-        //return redirect(route("gig.addForm"))->with('status', 'Added');
+
+        $user = $request->user();
+        //dd($user);
+
+
+
+        //$gig = new Gig($request);
+        //dd($gig);
+        //$user->gigs()->save($gig);
+        //dd($user->gigs->toArray());
+
+        //$request->session()->flash('status', 'Added');
+        //return redirect(route("gig.addForm"));
+        return redirect(route("gig.addForm"))->with('status', 'Added');
     }
 
 
@@ -145,7 +158,7 @@ class GigController extends Controller
 //
 //        $validator = Validator::make($request->all(), [
 //            'desc' => 'required|max:100',
-//            'gigday'=>'required|date|date_format:"Y-m-d"|after:today',
+//            'date'=>'required|date|date_format:"Y-m-d"|after:today',
 //        ]);
 //
 //        if ($validator->fails()) {
@@ -162,7 +175,7 @@ class GigController extends Controller
 //    {
 //        $validator = Validator::make($request->all(), [
 //            'desc' => 'required|max:100',
-//            'gigday'=>'required|date|date_format:"Y-m-d"|after:today',
+//            'date'=>'required|date|date_format:"Y-m-d"|after:today',
 //        ]);
 
 //        if ($validator->fails()) {

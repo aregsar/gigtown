@@ -52,12 +52,12 @@
 
                        <br />
                         Date:<br />              
-                        <input type="date" name="gigday" value="{{ old('gigday') }}">
+                        <input type="date" name="date" value="{{ old('date') }}">
                         <br />
-                        @if (count($errors->get('gigday')) > 0)
+                        @if (count($errors->get('date')) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
-                                    @foreach ($errors->get('gigday') as $error)
+                                    @foreach ($errors->get('date') as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
@@ -85,11 +85,11 @@
                       
                         <br />
                         Date:<br />
-                        <input type="date" name="gigday" value="{{ $oldGigDay }}">
-                        @if (count($gigdayErrors) > 0)
+                        <input type="date" name="date" value="{{ $oldDate }}">
+                        @if (count($dateErrors) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
-                                    @foreach ($gigdayErrors as $error)
+                                    @foreach ($dateErrors as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
