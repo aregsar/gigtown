@@ -17,6 +17,7 @@
                  --}}
 
                     <div class="panel-heading">Add a Gig</div>
+                    <div class="panel-heading">All fields are required</div>
 
                     {{--
 
@@ -38,8 +39,12 @@
                         {{ csrf_field() }}
 
                         Artist, Place and Time:<br />
-                        <textarea name="desc" id="text" maxlength="100" rows="4" cols="20" autofocus>{{ old('desc') }}</textarea>
-                         <br />
+                        @if(config('app.client_validation'))            
+                            <textarea name="desc" id="text" maxlength="100" rows="4" cols="20" autofocus required>{{ old('desc') }}</textarea>                   
+                        @else           
+                            <textarea name="desc" id="text" maxlength="100" rows="4" cols="20" autofocus>{{ old('desc') }}</textarea>                                 
+                        @endif
+                        <br />
                         @if (count($errors->get('desc')) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
@@ -51,8 +56,12 @@
                         @endif
 
                        <br />
-                        Date:<br />              
-                        <input type="date" name="date" value="{{ old('date') }}">
+                        Date: (non Chrome browsers type YYYY-MM-DD)<br />  
+                        @if(config('app.client_validation'))         
+                            <input type="date" name="date" value="{{ old('date') }}" placeholder="2017-07-24" required>
+                        @else           
+                            <input type="date" name="date" value="{{ old('date') }}" placeholder="2017-07-24">                       
+                        @endif
                         <br />
                         @if (count($errors->get('date')) > 0)
                             <div class="alert alert-danger" style="display:inline-block">

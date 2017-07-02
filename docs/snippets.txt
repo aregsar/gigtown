@@ -226,6 +226,145 @@ $table->softDeletes();
 https://blog.jetbrains.com/phpstorm/2017/03/new-in-phpstorm-2017-1-parameter-hints/
 
 
+------------------
+php artisan make:model Gig -m
+
+php artisan migrate:refresh
+-------------------
+Testing
+
+
+date format required
+2017-07-11
+
+phpunit
+
+php artisan make:test GigAddTest
+php artisan make:test Gig/GigAddTest
+
+
+phpunit.xml
+
+<php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="CACHE_DRIVER" value="array"/>
+    <env name="SESSION_DRIVER" value="array"/>
+    <env name="QUEUE_DRIVER" value="sync"/>
+    <env name=“DB_CONNECTION” value=“sqlite”/>
+    <env name=“DB_DATABASE” value=“:memory:”/>
+</php>
+
+$factory->define(App\User::class, function (Faker\Generator $faker) 
+{
+    static $password;
+
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
+});
+
+
+
+$factory->define(App\Gig::class, function (Faker\Generator $faker) 
+{
+    static $password;
+
+    return [
+        ‘desc’ => $faker->namexxxxx,
+        ‘gigday’ => \Carbon\Carbon::now(),
+        ‘user_id’ => function(){
+                return factory(App\User::class)->create()->id;
+		},
+    ];
+});
+
+
+
+function test_xxx()
+{
+    $this->actingAs(factory(‘App\User’)->create());
+
+    //$gig = factory(App\Gig::class)->create();
+    $gig = factory(‘App\Gig’)->make();
+
+    $this->post(‘/gig/add’),$gig->toArray());
+
+    $this->assertSee($gig->desc);
+}
+
+
+
+$response->assertStatus($code);
+Assert that the response has a given code.
+$response->assertRedirect($uri);
+Assert that the response is a redirect to a given URI.
+$response->assertHeader($headerName, $value = null);
+Assert that the given header is present on the response.
+$response->assertCookie($cookieName, $value = null);
+Assert that the response contains the given cookie.
+$response->assertPlainCookie($cookieName, $value = null);
+Assert that the response contains the given cookie (unencrypted).
+$response->assertSessionHas($key, $value = null);
+Assert that the session contains the given piece of data.
+$response->assertSessionHasErrors(array $keys);
+Assert that the session contains an error for the given field.
+$response->assertSessionMissing($key);
+Assert that the session does not contain the given key.
+$response->assertJson(array $data);
+Assert that the response contains the given JSON data.
+$response->assertJsonFragment(array $data);
+Assert that the response contains the given JSON fragment.
+$response->assertJsonMissing(array $data);
+Assert that the response does not contain the given JSON fragment.
+$response->assertExactJson(array $data);
+Assert that the response contains an exact match of the given JSON data.
+$response->assertJsonStructure(array $structure);
+Assert that the response has a given JSON structure.
+$response->assertViewHas($key, $value = null);
+Assert that the response view was given a piece of data.
+
+
+=====================
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class GigAddTest extends TestCase
+{
+    use DatabaseMigrations;
+    use DatabaseTransactions;
+
+    //parent::setUp();
+
+    public function navigating_to_add_gig_displays_form()
+    {
+        $this->assertTrue(true);
+
+        $response = $this->get('/');
+
+        $response = $this->withSession(['foo' => 'bar'])->get('/');
+
+        $user = factory(User::class)->create();
+
+        //$this->actingAs($user, 'web')
+
+        $response = $this->actingAs($user)
+                         ->withSession(['foo' => 'bar'])
+                         ->get('/');
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('users'
+                                , ['email' => 'sally@example.com']);
+    }
+}
 
 
 
