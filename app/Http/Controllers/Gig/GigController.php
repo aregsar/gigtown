@@ -26,14 +26,41 @@ class GigController extends Controller
             'date'=>'required|date|date_format:"Y-m-d"|after:today',
         ]);
 
-        $input = ['user_id'=> $request->user()->id
-            ,'desc' => $request->input('desc')
-            ,'date' => $request->input('date')];
+//        $input = ['user_id'=> $request->user()->id
+//            ,'desc' => $request->input('desc')
+//            ,'date' => $request->input('date')];
+//
+//        (new Gig($input))->save();
 
-        (new Gig($input))->save();
+
+//        Gig::create(  $request->input('desc')
+//                    , $request->input('date'));
+
+        Gig::createFromRequest($request);
 
         return redirect(route("gig.addForm"))->with('status', 'Added');
     }
+
+
+
+//    public function add(Request $request)
+//    {
+//        $this->validate($request, [
+//            'desc' => 'required|max:100',
+//            'date'=>'required|date|date_format:"Y-m-d"|after:today',
+//        ]);
+//
+//        $input = ['user_id'=> $request->user()->id
+//            ,'desc' => $request->input('desc')
+//            ,'date' => $request->input('date')];
+//
+//        (new Gig($input))->save();
+//
+//        //Gig::create(  $request->input('desc')
+//        //            , $request->input('date'));
+//
+//        return redirect(route("gig.addForm"))->with('status', 'Added');
+//    }
 
 
 

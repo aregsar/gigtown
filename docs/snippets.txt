@@ -158,4 +158,74 @@ $validator->errors()->add('field', 'Bad field');
     </div>
 @endif
 
+=======================
+
+git push --set-upstream origin feature_add_gig
+
+Auth::loginUsingId(1);
+
+//date format
+2017-07-04
+
+https://scotch.io/tutorials/easier-datetime-in-laravel-and-php-with-carbon
+
+http://carbon.nesbot.com/
+
+https://github.com/briannesbitt/Carbon
+
+https://packagist.org/packages/nesbot/carbon
+
+class MyModel
+{
+    protected $dates = ['date','published_at'];
+}
+
+$model = new MyModel;
+$model->date = Carbon::now();
+
+$published_string = $model->published_at->format('M d Y');
+$published_carbon_date = $model->published_at;
+
+Carbon::parse('Y-m-d', $date_string);
+
+================
+
+$gigs = Gig::where('user_id','=',Auth::user()->id)->get();
+
+
+
+$gigs = Gig::all();
+
+
+
+$gig = Gig::find($id);
+
+
+
+$gigs = Gig::where('user_id','=',Auth::user()->id)->update(['desc'=>$newDesc]);
+
+Gig::where('user_id','=',Auth::user()->id)->delete();
+
+Gig::where('user_id','=',Auth::user()->id)->update(['desc'=>$newDesc]);
+
+DB::Table('gigs')->where(...);
+-----------------
+class Gig 
+{
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+}
+
+//migration
+Schema::table('gigs',function($table){
+$table->softDeletes();
+}
+
+----------------
+
+https://blog.jetbrains.com/phpstorm/2017/03/new-in-phpstorm-2017-1-parameter-hints/
+
+
+
+
 
