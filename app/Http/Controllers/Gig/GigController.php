@@ -21,43 +21,25 @@ class GigController extends Controller
     //Route::post('/gig/add', 'gig\GigController@add')->name('gig.add');
     public function add(Request $request)
     {
-        $this->validate($request, [
-            'desc' => 'required|max:100',
-            'date'=>'required|date|date_format:"Y-m-d"|after:today',
-        ]);
+        $this->validate($request, Gig::$rules);
 
-        $input = ['user_id'=> $request->user()->id
-           ,'desc' => $request->input('desc')
-           ,'date' => $request->input('date')];
+        $input = ['desc' => $request->input('desc')
+                 ,'date' => $request->input('date')];
 
-        (new Gig($input))->save();
+        $gig = new Gig($input);
+
+        $request->user()->gigs()->save($gig);
 
         return redirect(route("gig.addForm"))->with('status', 'Added');
     }
 
 
-
-    // public function add(Request $request)
-    // {
-    //     $this->validate($request, Gig::$rules);
-
-    //     Gig::create($request->input('desc')
-    //                ,$request->input('date'));
-
-    //     return redirect(route("gig.addForm"))->with('status', 'Added');
-    // }
-
-
-
-    // public function add(Request $request)
-    // {
-    //     $this->validate($request, Gig::$rules);
-
-    //     Gig::createFromRequest($request);
-
-    //     return redirect(route("gig.addForm"))->with('status', 'Added');
-    // }
-
+    public function list(Request $request)
+    {
+        $gigcoll = Gig::where("date",">=", date("Y-m-d"))->orderBy('date')->take(10)->get();
+    
+        return view('gig.list', ["gigs"=>$gigcoll]);
+    }
 
 
     //https://laravel.com/api/5.4/Illuminate/Support/ViewErrorBag.html

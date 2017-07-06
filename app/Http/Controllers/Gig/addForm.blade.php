@@ -19,8 +19,8 @@
                     <div class="panel-heading">Add a Gig</div>
                     <div class="panel-heading">All fields are required</div>
 
-                    {{--
 
+                {{-- 
                     @if (count($errors->all()) > 0)
                             <div class="alert alert-danger" style="display:inline-block">
                                 <ul>
@@ -32,7 +32,7 @@
                     @endif
                     <br />
                     <br />
-                    --}}
+                --}}
 
                   
                     <form method="POST" action="{{route('gig.add')}}">

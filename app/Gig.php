@@ -6,11 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+class ValidationHelper
+{
+    public static $gig_desc_validation_rules = 'required|max:100';
+    public static $gig_date_validation_rules = 'required|date|date_format:"Y-m-d"|after:today';
+
+}
+
 class Gig extends Model
 {
+  
     public static $rules = [
-            'desc' => 'required|max:100',
-            'date'=>'required|date|date_format:"Y-m-d"|after:today',
+            'desc' => 'required|max:100'
+            ,'date'=> 'required|date|date_format:"Y-m-d"|after:today'
         ];
 
     protected $fillable = [
